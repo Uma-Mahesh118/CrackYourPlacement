@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        vector<int> nums(1,1);
+        vector<int> mult = {2,3,5};
+        vector<int> pos = {0,0,0};
+        int count = n;
+        while(count--) {
+            int one = mult[0] * nums[pos[0]];
+            int two = mult[1] * nums[pos[1]];
+            int three = mult[2] * nums[pos[2]];
+            
+            int min_val = min(one, min(two, three));
+            if(one == min_val)     pos[0]++;
+            if(two == min_val)     pos[1]++;
+            if(three == min_val)   pos[2]++;
+            
+            nums.push_back(min_val);
+        }
+        return nums[n-1];
+    }
+};
