@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    void paths(vector<vector<int>>& graph, vector<int>& pt, vector<bool>& vis, int curr) {
+        if(pt.size() == graph.size())      return;
+        else {
+            pt.push_back(curr);
+            for(int n : graph[curr])
+                if(vis[n] == false) {
+                    vis[n] =true;
+                    paths(graph, pt, vis, n);
+                }
+        }
+    }
+    vector<int> dfsOfGraph(vector<vector<int>>& adj) {
+        vector<int> pt;
+        vector<bool> vis(adj.size(), false);
+        vis[0] = true;
+        paths(adj, pt, vis, 0);
+        return pt;
+    }
+};
