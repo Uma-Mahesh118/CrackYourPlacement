@@ -1,0 +1,29 @@
+class Solution {
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool paths(vector<int> graph[], vector<bool>& vis, int curr, int pt) {
+        vis[curr] = true;
+        for(int n : graph[curr]) {
+            if(!vis[n]){
+                if(paths(graph,vis,n, curr)) {
+                    return true;
+                }
+            }
+            else if(n != pt) {
+                return true;
+            }
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[]) {
+        vector<bool> vis(V, false);
+        for(int i=0; i<V; i++) {
+            if(!vis[i]) {
+                if(paths(adj, vis, i, -1)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
