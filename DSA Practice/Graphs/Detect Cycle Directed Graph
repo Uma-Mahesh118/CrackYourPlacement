@@ -1,0 +1,31 @@
+class Solution {
+  public:
+    bool paths(vector<int> graph[], vector<bool>& vis, vector<bool>& rec, int curr, int pt) {
+        vis[curr] = true;
+        rec[curr] = true;
+        for(int n : graph[curr]) {
+            if(!vis[n]) {
+                if(paths(graph,vis, rec, n, curr)) {
+                    return true;
+                }
+            }
+            else if(rec[n]){
+                return true;
+            }
+        }
+        rec[curr] = false;
+        return false;
+    }
+    bool isCyclic(int V, vector<int> adj[]) {
+        vector<bool> vis(V, false);
+        for(int i=0; i<V; i++) {
+            if(!vis[i]) {
+                vector<bool> rec(V, false);
+                if(paths(adj, vis,rec, i, -1)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
