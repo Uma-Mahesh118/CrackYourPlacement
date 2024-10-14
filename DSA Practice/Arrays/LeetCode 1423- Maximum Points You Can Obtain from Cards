@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int maxScore(vector<int>& arr, int k) {
+        int lsum= 0;
+        for(int i=0; i<k; i++) lsum += arr[i];
+        int maxSum = lsum;
+        for(int i = k-1, j= arr.size() -1; i>=0; i--, j--) {
+            lsum += arr[j]-arr[i];
+            maxSum = max(lsum, maxSum);
+        }
+        return maxSum;
+    }
+};
