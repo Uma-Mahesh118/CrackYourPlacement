@@ -1,0 +1,16 @@
+class Solution {
+public:
+    long long minimumSteps(string s) {
+        long long l =0, r = 0, count=0;
+        while(r<s.size()) {
+            if(s[r] == '0') {
+                count += r - l;
+                l++; r++;
+            }
+            else {
+                r++;
+            }
+        }
+        return count;
+    }
+};
