@@ -1,0 +1,23 @@
+# Basic Solution
+
+class Solution {
+public:
+    int strStr(string strAct, string strCh) {
+        for(int i=0; i<strAct.size(); i++) {
+            if(strAct[i] == strCh[0]) {
+                int st = i;
+                bool found = true;
+                for(int j=0; j<strCh.size(); j++) {
+                    if(strAct[st++] != strCh[j]) {
+                        found = false;
+                        break;
+                    }        
+                }
+                if(found) return i;
+            }
+        }
+        return -1;
+    }
+};
+
+# KMP Based solution
