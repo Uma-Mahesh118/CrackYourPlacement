@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int sumSubarrayMins(vector<int>& arr) {
+        int count = 0;
+        for(int i=0; i< arr.size(); i++) {
+            int mini = arr[i];
+            count += mini;
+            for(int j=i+1; j<arr.size(); j++) {
+                mini = min(arr[j], mini);
+                count+=mini;
+            }
+        }
+        return count;
+    }
+};
