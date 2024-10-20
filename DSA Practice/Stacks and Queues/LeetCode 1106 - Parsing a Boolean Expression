@@ -1,0 +1,47 @@
+class Solution {
+    void evaluate(stack<char>& optr, stack<char>& operand) {
+        char op = optr.top(); 
+        optr.pop();            
+        bool ans;
+        if (op == '|') {
+            ans = false; 
+            while (operand.top() != '(') {
+                ans |= (operand.top() == 't');
+                operand.pop();
+            }
+        } 
+        else if (op == '&') {
+            ans = true;  
+            while (operand.top() != '(') {
+                ans &= (operand.top() == 't');
+                operand.pop();
+            }
+        } 
+        else if (op == '!') {
+            ans = (operand.top() == 't');
+            ans = !ans;
+            operand.pop();  // Pop the value
+        }
+        operand.pop();  // Pop the '('
+
+        if (ans) operand.push('t');
+        else     operand.push('f');  
+    }
+
+public:
+    bool parseBoolExpr(string expression) {
+        stack<char> optr, operand;
+        int idx = 0;
+        while (expression[idx]) {
+            if (expression[idx] == '!' || expression[idx] == '&' || expression[idx] == '|') {
+                optr.push(expression[idx]); 
+            } 
+            else if (expression[idx] == 't' || expression[idx] == 'f' || expression[idx] == '(') {
+                operand.push(expression[idx]);
+            } 
+            else if (expression[idx] == ')')    evaluate(optr, operand);
+            idx++;
+        }
+        return operand.top() == 't';
+    }
+};
