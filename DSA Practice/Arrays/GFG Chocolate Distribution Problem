@@ -1,3 +1,5 @@
+//difference between minimum and maximum chocolates must be reduced
+// Sliding Window approach
 class Solution{
     public:
     long long findMinDiff(vector<long long> a, long long n, long long m){
