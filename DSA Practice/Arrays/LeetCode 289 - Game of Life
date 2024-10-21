@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void gameOfLife(vector<vector<int>>& a) {
+        vector<pair<int,int>> n = {{0, 1}, {0, -1}, {1,0}, {-1, 0}, {1,1}, {1,-1}, {-1,1}, {-1,-1}};
+        for(int i=0; i<a.size(); i++) {
+            for(int j=0; j<a[0].size(); j++) {
+                int count =0;
+                for(auto p : n) {
+                    if(i+p.first >=0 && i+p.first<a.size() && j+p.second >=0 && j+p.second <a[0].size()) {
+                        count += a[i+p.first][j+p.second] % 2;
+                    } 
+                }
+                if(a[i][j]%2 == 1 && (count<2 || count >3))     a[i][j] = 3;
+                else if(a[i][j]%2 == 0 && count == 3)    a[i][j] = 2;
+            }
+        }
+
+
+        for(int i=0; i<a.size(); i++) {
+            for(int j=0; j<a[0].size(); j++) {
+                if(a[i][j] == 3) a[i][j] = 0;
+                else if(a[i][j] == 2) a[i][j] = 1;
+            }
+        }
+    }
+};
