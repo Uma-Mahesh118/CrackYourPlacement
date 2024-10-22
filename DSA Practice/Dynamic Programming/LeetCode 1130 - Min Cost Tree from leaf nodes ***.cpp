@@ -28,7 +28,7 @@ public:
 };
 
 
-##Better Method
+//Better Method
 class Solution {
 public:
     int mctFromLeafValues(vector<int>& a) {
