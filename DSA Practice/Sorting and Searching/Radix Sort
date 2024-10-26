@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+int getMax(vector<int> arr, int n)
+{   int mx = arr[0];
+    for (int i = 1; i < n; i++) mx = max( mx, arr[i]);
+    return mx;
+}
+void countSort(vector<int> &arr, int n, int pass)
+{   vector<vector<int>> ans(10, vector<int>(0));
+
+    for(int i=0; i<n; i++) {
+        ans[(arr[i]/pass)%10].push_back(arr[i]);
+    }
+
+    arr.clear();
+    for(int i=0; i<ans.size(); i++) {
+        for(int j=0; j<ans[i].size(); j++) {
+            arr.push_back(ans[i][j]);
+        }
+    }
+}
+void radixsort(vector<int> &arr, int n)
+{   int m = getMax(arr, n);
+    for (int i=1; m/i>0; i*=10)
+        countSort(arr, n, i);
+}
+int main()
+{   vector<int> arr = { 170, 45, 75, 90, 802, 24, 2, 66 };
+    int n = arr.size();
+    radixsort(arr, n);
+ 
+    for(int i=0; i<n; i++) cout<<arr[i]<<" ";
+    cout<<endl;
+    return 0;
+}
