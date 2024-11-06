@@ -1,0 +1,29 @@
+#include <vector>
+#include <algorithm>
+#include <bit>
+
+using namespace std;
+
+class Solution {
+public:
+    bool canSortArray(const vector<int> &nums) {
+        int n = nums.size();
+        int pmax = INT_MIN, cmin = INT_MAX, cmax = INT_MIN;  
+        int pcnt = -1;  
+        for (int v : nums) {
+            int ccnt = popcount(static_cast<unsigned int>(v));
+            if (pcnt == ccnt) {
+                cmin = min(cmin, v);
+                cmax = max(cmax, v);
+            } else {
+                if (cmin < pmax) {
+                    return false;
+                }
+                pmax = cmax;
+                cmin = cmax = v;
+                pcnt = ccnt;
+            }
+        }
+        return cmin >= pmax;
+    }
+};
